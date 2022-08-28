@@ -8,3 +8,13 @@ rm cilium-linux-amd64.tar.gz{,.sha256sum}
 
 # Install Cilium
 cilium install
+
+# Test the deployment
+if [flag!=0]
+then  
+    echo "Deployment failed, there is something not right!"
+    exit 1
+else
+    echo "Cilium Deployed Successfully!"
+    exit 0
+fi 
