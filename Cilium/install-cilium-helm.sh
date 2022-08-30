@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Check Kernel Version.
+KerVer=$(uname -r | cut -c1-3)
+if [[ $KerVer > '4.9' ]]; then
+    echo "Kernel Verion supported, heading towards cilium install."
+else
+    echo "Kernel Version not supported, Update your kernel version first!!"
+    exit 1
+fi
+
 # Add Cilium remote repo for helm
 helm repo add cilium https://helm.cilium.io/
 
