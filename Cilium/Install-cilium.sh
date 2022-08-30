@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Envirnment Tests
+KerVer=$(uname -r | cut -c1-3)
+if [[ $KerVer > '4.9' ]]; then
+    echo "Kernel Verion supported, heading towards cilium install."
+else
+    echo "Kernel Version not supported, Update your kernel version first!!"
+    exit 1
+fi
+
+
 # Install cilium CLI
 curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz{,.sha256sum}
 sha256sum --check cilium-linux-amd64.tar.gz.sha256sum
