@@ -8,11 +8,10 @@ rm cilium-linux-amd64.tar.gz{,.sha256sum}
 
 # Install Cilium
 cilium install
-flag=${echo $?}
+flag=$(echo $?)
 
 # Test the deployment
-if [flag!=0]
-then  
+if [ flag != 0 ]; then
     echo "Deployment failed, there is something not right!"
     exit 1
 else
