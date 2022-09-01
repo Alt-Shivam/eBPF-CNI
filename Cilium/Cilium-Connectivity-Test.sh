@@ -9,6 +9,6 @@ if [ flag != 0 ]; then
     echo "Connectivity Test failed!, please reinstall cilium or check your K8s cluster!"
     exit 1
 else
-    echo "Cilium Deployed Successfully!"
+    echo "Connectivity test successfull!"
     exit 0
 fi
