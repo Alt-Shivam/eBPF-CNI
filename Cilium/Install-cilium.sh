@@ -9,6 +9,15 @@ else
     exit 1
 fi
 
+# Clang Version Check
+ClangVersion=$(clang --version | grep 'clang version' | cut -c15-16)
+
+if [[ $ClangVersion -ge '10' ]]; then
+    echo "Clang version supported."
+else
+    echo "clang Version not supported or not installed, Update your clang first!!"
+    exit 2
+fi
 
 # Install cilium CLI
 curl -L --remote-name-all https://github.com/cilium/cilium-cli/releases/latest/download/cilium-linux-amd64.tar.gz{,.sha256sum}
@@ -28,3 +37,22 @@ else
     echo "Cilium Deployed Successfully!"
     exit 0
 fi
+
+echo "Currently Cilium offers the following advanced features."
+echo "Required Kernel Versions for Advanced Features"
+echo "      Cilium Feature                                              |  Minimum Kernel Version"
+echo "      ------------------------------------------------------------+------------------------------"
+echo "      IPv4 fragment handling                                      | >= 4.10"
+echo "      Restrictions on unique prefix lengths for CIDR policy rules | >= 4.11"
+echo "      IPsec Transparent Encryption in tunneling mode              | >= 4.19"
+echo "      WireGuard Transparent Encryption                            | >= 5.6"
+echo "      Host-Reachable Services                                     | >= 4.19.57, >= 5.1.16, >= 5.2"
+echo "      Kubernetes Without kube-proxy                               | >= 4.19.57, >= 5.1.16, >= 5.2"
+echo "      Bandwidth Manager (beta)                                    | >= 5.1"
+echo "      Local Redirect Policy (beta)                                | >= 4.19.57, >= 5.1.16, >= 5.2"
+echo "      Full support for Session Affinity                           | >= 5.7"
+echo "      BPF-based proxy redirection                                 | >= 5.7"
+echo "      BPF-based host routing                                      | >= 5.10"
+echo "      Socket-level LB bypass in pod netns                         | >= 5.7"
+echo "      Egress Gateway (beta)                                       | >= 5.2"
+echo "      -------------------------------------------------------------------------------------------"
