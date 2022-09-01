@@ -32,7 +32,7 @@ flag=$(echo $?)
 # Test the deployment
 if [ flag != 0 ]; then
     echo "Deployment failed, there is something not right!"
-    exit 1
+    exit 3
 else
     echo "Cilium Deployed Successfully!"
     exit 0
